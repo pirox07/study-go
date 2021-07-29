@@ -15,7 +15,7 @@ const (
 	olURL = "https://api.us.onelogin.com"
 )
 
-type Sample struct {
+type GrantType struct {
 	GrantType string `json:"grant_type"`
 }
 
@@ -93,7 +93,7 @@ func main(){
 }
 
 func generateToken(userName string, password string) (string, error){
-	data := new(Sample)
+	data := new(GrantType)
 	data.GrantType = "client_credentials"
 
 	dataJSON, _ := json.Marshal(data)
@@ -104,7 +104,6 @@ func generateToken(userName string, password string) (string, error){
 		fmt.Println("[Err] ", err.Error())
 	}
 	req.Header.Set("Content-Type", "application/json")
-	//req.Header.Set("Authorization", "Basic " + encodedCredentials)
 	req.Header.Set("Authorization", "client_id:" + userName + " ,client_secret:" + password)
 
 
